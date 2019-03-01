@@ -42,3 +42,10 @@ sed -i "s$'mysql://<username>:<password>@localhost/notesdb'\$mysql://root:root12
 
 sed -i "s/    app.run(debug=True)/    app.run(host=\'0.0.0.0\',port=3000,debug=True)/g" note-server-json.py
 
+python3.6 -m pip install --upgrade pip setuptools wheel
+python3.6 -m venv venv
+source venv/bin/activate
+
+python -m pip install -r requirements.txt
+python note-server-json.py
+
