@@ -30,3 +30,30 @@ echo "======= removing unneeded dependencies ======="
 
 echo "======= start meteor to init db ======="
 /usr/local/bin/meteor --allow-superuser  >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= backup .meteor/local/db/ ======="
+cp -r /vagrant/meteor-inventory-system/.meteor/local/db/ /vagrant/meteor-inventory-system/.meteor-local-db-backup/  >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= move /vagrant/meteor-inventory-system/.meteor/local/db/ to /home/vagrant/db ======="
+mv /vagrant/meteor-inventory-system/.meteor/local/db/ /home/vagrant/db/ >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======== move /vagrant/meteor-inventory-system/.meteor/ to /home/vagrant/.meteor ========"
+mv /vagrant/meteor-inventory-system/.meteor/ /home/vagrant/.meteor/
+
+echo "======== create symlink /vagrant/meteor-inventory-system/.meteor/ => /home/vagrant/.meteor/ ========"
+ln -s /home/vagrant/.meteor/ /vagrant/meteor-inventory-system/.meteor >> /home/vagrant/upsart-log.txt 2>&1
+
+echo "======= create symlink /vagrant/meteor-inventory-system/.meteor/local/db/ => /home/vagrant/db/ ======="
+ln -s /home/vagrant/db/ /vagrant/meteor-inventory-system/.meteor/local/db >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= cd /vagrant/meteor-inventory-system/ ======="
+cd /vagrant/meteor-inventory-system/ >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= copy /vagrant/meteor-inventory-system/node_modules to /home/vagrant/node_modules/ ======="
+cp -r /vagrant/meteor-inventory-system/node_modules/ /home/vagrant/node_modules/ >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= mv /vagrant/meteor-inventory-system/node_modules to /home/vagrant/old-node_modules/ ======"
+mv /vagrant/meteor-inventory-system/node_modules/ /home/vagrant/old-node_modules/ >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= create symlink /vagrant/meteor-inventory-system/node_modules => /home/vagrant/node_modules ======="
+ln -s /home/vagrant/node_modules/ /vagrant/meteor-inventory-system/node_modules >> /home/vagrant/upstart-log.txt 2>&1
