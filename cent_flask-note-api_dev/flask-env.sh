@@ -32,3 +32,13 @@ sudo chown -R vagrant:vagrant flask-note-api/
 
 sudo chmod -R 770 flask-note-api/
 
+cd /vagrant/flask-note-api/
+
+sed -i "s@'/path/to/csv/file.csv'@'/vagrant/flask-note-api/note.csv'@g" note.sql
+
+sudo mysql -u root -proot123 < /vagrant/flask-note-api/note.sql 
+
+sed -i "s$'mysql://<username>:<password>@localhost/notesdb'\$mysql://root:root123@localhost/notesdb'\$g" note-server-json.py
+
+sed -i "s/    app.run(debug=True)/    app.run(host=\'0.0.0.0\',port=3000,debug=True)/g" note-server-json.py
+
