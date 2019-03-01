@@ -15,3 +15,18 @@ cd /home/vagrant/
 
 echo "======= Installing Meteor ======="
 curl https://install.meteor.com/ | sh >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= cd into meteor-inventory-system ======="
+cd /vagrant/meteor-inventory-system/ >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= create meteor project files ======="
+/usr/local/bin/meteor create . --allow-superuser >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= adding dependencies ======="
+/usr/local/bin/meteor add accounts-ui accounts-password themeteorchef:jquery-validation session iron:router --allow-superuser >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= removing unneeded dependencies ======="
+/usr/local/bin/meteor remove autopublish insecure --allow-superuser >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= start meteor to init db ======="
+/usr/local/bin/meteor --allow-superuser  >> /home/vagrant/upstart-log.txt 2>&1
