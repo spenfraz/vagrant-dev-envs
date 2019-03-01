@@ -10,8 +10,9 @@ echo "======= groupinstall development ======="
 sudo yum -y groupinstall development >> /home/vagrant/upstart-log.txt 2>&1
 
 # Inline with Upstream Stable
-# IUS is a community project that provides RPM packages for newer 
-# versions of select software for Enterprise Linux distributions.
+# https://ius.io/
+# "IUS is a community project that provides RPM packages for newer 
+# versions of select software for Enterprise Linux distributions."
 echo "======= install IUS ======="
 sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm >> /home/vagrant/upstart-log.txt 2>&1
 
