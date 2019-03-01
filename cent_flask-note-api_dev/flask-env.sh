@@ -23,3 +23,12 @@ sudo systemctl start mysqld
 
 sudo mysqladmin -u root password root123
 
+cd /vagrant/
+
+git clone https://github.com/spenfraz/flask-note-api.git
+
+#change ownership (defaults to root)
+sudo chown -R vagrant:vagrant flask-note-api/
+
+sudo chmod -R 770 flask-note-api/
+
