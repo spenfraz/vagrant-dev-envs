@@ -57,3 +57,19 @@ mv /vagrant/meteor-inventory-system/node_modules/ /home/vagrant/old-node_modules
 
 echo "======= create symlink /vagrant/meteor-inventory-system/node_modules => /home/vagrant/node_modules ======="
 ln -s /home/vagrant/node_modules/ /vagrant/meteor-inventory-system/node_modules >> /home/vagrant/upstart-log.txt 2>&1
+
+echo "======= install babel/runtime, bcrypt ======="
+cd /vagrant/meteor-inventory-system/
+/usr/local/bin/meteor npm install --save @babel/runtime >> /home/vagrant/upstart-log.txt 2>&1
+# ERRORS OUT # meteor npm install --save bcrypt
+
+echo "======= cleanup ======"
+if [ -f /vagrant/meteor-inventory-system/package-lock.json ]; then
+   rm /vagrant/meteor-inventory-system/package-lock.json
+fi
+sudo chown vagrant:vagrant /vagrant/ -Rh
+sudo chown vagrant:vagrant /home/vagrant/ -Rh
+
+echo "======= run meteor ======="
+cd /vagrant/meteor-inventory-system/
+/usr/local/bin/meteor --allow-superuser >> /home/vagrant/upstart-log.txt 2>&1
