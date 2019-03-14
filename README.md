@@ -11,7 +11,7 @@ CentOS7.
     4.  $ vagrant up
     5.  Check out:  http://localhost:3000/notes/api/v1/notes
     5.  Ctrl-C twice to exit. (should continue running)
-    6.  $ vagrant (suspend, halt or destroy)
+    6.  $ vagrant (ssh, suspend, halt or destroy)
     
  - flask-note-api dev environment
     ( **tested on** Windows 10 )
@@ -24,7 +24,7 @@ CentOS7.
     7.  $ vagrant up
     8.  Check out:  http://localhost:3000/notes/api/v1/notes
     9.  Ctrl-C twice to exit. (should continue running)
-    10.  $ vagrant (suspend, halt or destroy)
+    10.  $ vagrant (ssh, suspend, halt or destroy)
     
 - meteor-inventory-system dev environment
     ( **tested on** Linux Mint 19.1 Tessa Ubuntu Bionic )
@@ -34,4 +34,4 @@ CentOS7.
     4.  $ vagrant up
     5.  Check out:  http://localhost:3000
     5.  Ctrl-C twice to exit. (should continue running)
-    6.  $ vagrant (suspend, halt or destroy)
+    6.  $ vagrant (ssh, suspend, halt or destroy)
