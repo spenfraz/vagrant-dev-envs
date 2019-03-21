@@ -2,10 +2,8 @@
 echo "======== update yum ======="
 sudo yum -y update >> /home/vagrant/upstart-log.txt 2>&1
 
-
 echo "======== install wget yum-utils ======="
 sudo yum -y install wget yum-utils >> /home/vagrant/upstart-log.txt 2>&1
-
 
 echo "======== install IUM ======"
 sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm >> /home/vagrant/upstart-log.txt 2>&1
