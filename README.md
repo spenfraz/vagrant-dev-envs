@@ -3,6 +3,23 @@
 Configuration Management via Vagrant, using Virtualbox, on
 CentOS7.
 ----
+Vagrant CheatSheet --->  https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4
+----
+- minimal CentOS dev environment
+    (**tested on** Windows 10)
+    1. Install Git: https://git-scm.com/downloads
+    2. Install Chocolatey (Install with cmd.exe): https://chocolatey.org/install
+    3. Open Administrator terminal (cmd) & run: $ choco install vagrant virtualbox
+    4. Open new (cmd) terminal or $ refreshenv
+    5. $ git clone https://github.com/spenfraz/vagrant-dev-envs.git
+    6. $ cd vagrant-dev-envs\cent_minimal_dev
+    7. $ vagrant up
+    8. (Once previous step finishes and control of the terminal returns:) $ vagrant ssh
+    9. (should get: "[vagrant@minimal ~]$" prompt) You are now logged in to the newly created CentOS instance.
+    10. (to check out files shared between guest and host:) $ cd /vagrant && ls
+    11. (to exit:) $ exit
+    12. (will drop you back into the original terminal session)  Options:  $ vagrant (ssh, halt, suspend or destroy)
+    
 - aws-ansible-ctrl dev environment
     (**tested on** Windows 10 )
     1. Install Git:  https://git-scm.com/downloads
