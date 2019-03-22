@@ -97,7 +97,8 @@ Vagrant CheatSheet --->  https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4
     8. (Once previous step finishes and control of the terminal returns:) $ vagrant ssh
     9. (should get: "[vagrant@openjdk-java8-maven ~]$" prompt) You are now logged in to the newly created CentOS instance.
     10. $ cd schedule-scraper-soup/
-    11. $ mvn spring-boot:run
+    11. $ mvn clean compile assembly:single
+    12. $ java -jar target/schedule-scraper-soup-0.0.1-SNAPSHOT-jar-with-dependencies.jar
     12. (The sqlite db file is ignored (text files of data are included), so no data will be shown until an "erase and build table" option is executed.)
     13. (to exit:) $ exit
     14. (will drop you back into the original terminal session)  Options:  $ vagrant (ssh, halt, suspend or destroy) 
