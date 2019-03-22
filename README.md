@@ -13,8 +13,8 @@ CentOS7.
     6. $ cd vagrant-dev-envs\cent_ansible-ctrl_dev
     7. Via AWS Console, launch an EC2 instance with 'Amazon Linux 2 AMI'.
     8. Save the .pem file in vagrant-dev-envs\cent_ansible-ctrl_dev\ directory.
-    9. (In "hosts" file) Replace <public-ip> with the public ip of the launched EC2 instance.
-    10. (In "hosts" file) Replace <filename> with the name of the .pem file.
+    9. (In "hosts" file) Replace <public-ip\> with the public ip of the launched EC2 instance.
+    10. (In "hosts" file) Replace <filename\> with the name of the .pem file.
     11. $ vagrant up
     12. (after previous step finishes) $ vagrant ssh
     13. (should get: "[vagrant@ansible-dev ~]$ " prompt) $ ansible test -m ping
