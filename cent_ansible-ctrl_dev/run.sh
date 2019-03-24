@@ -23,6 +23,6 @@ sudo mkdir /etc/ansible/ >> /home/vagrant/upstart-log.txt 2>&1
 sudo cp /vagrant/hosts /etc/ansible/hosts >> /home/vagrant/upstart-log.txt 2>&1
 
 echo "====== copy keypair.pem to /home/vagrant/ & chown, chmod ======"
-cp /vagrant/win-keypair.pem /home/vagrant/.ssh/win-keypair.pem >> /home/vagrant/upstart-log.txt 2>&1
-sudo chown vagrant:vagrant /home/vagrant/.ssh/win-keypair.pem >> /home/vagrant/upstart-log.txt 2>&1
-sudo chmod 0400 /home/vagrant/.ssh/win-keypair.pem >> /home/vagrant/upstart-log.txt 2>&1
+cp /vagrant/<filename>.pem /home/vagrant/.ssh/<filename>.pem >> /home/vagrant/upstart-log.txt 2>&1
+sudo chown vagrant:vagrant /home/vagrant/.ssh/<filename>.pem >> /home/vagrant/upstart-log.txt 2>&1
+sudo chmod 0400 /home/vagrant/.ssh/<filename>.pem >> /home/vagrant/upstart-log.txt 2>&1
