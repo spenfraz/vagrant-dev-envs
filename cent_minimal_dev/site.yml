@@ -1,0 +1,19 @@
+---
+- hosts: all
+  remote_user: vagrant
+  become: yes
+  
+  tasks:
+  - name: include vars in vars.yml
+    include_vars:
+      file: vars.yml
+
+  - name: update yum
+    yum:
+      name: '*' 
+      state: latest
+
+  - name: install git
+    yum:
+      name: "{{ install_pkgs }}"
+      state: present
