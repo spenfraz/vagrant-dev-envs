@@ -1,0 +1,11 @@
+---
+remote_user: "vagrant"
+home_dir: "/home/{{ remote_user }}/"
+
+install_pkgs: "['java-1.8.0-openjdk-devel','maven','git']"
+
+project_name: "schedule-scraper-soup"
+github_account: "spenfraz"
+project_repo: "https://github.com/{{ github_account }}/{{ project_name }}.git"
+
+build_cmd: "cd {{ home_dir + project_name }} && mvn clean compile assembly:single"

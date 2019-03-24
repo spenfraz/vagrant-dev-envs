@@ -1,0 +1,29 @@
+---
+- hosts: all
+  remote_user: vagrant
+  become: yes
+  
+  tasks:
+  - name: include vars in vars.yml
+    include_vars:
+      file: vars.yml
+
+  - name: update yum
+    yum:
+      name: '*' 
+      state: latest
+
+  - name: install JDK 1.8, git, maven
+    yum:
+      name: "{{ install_pkgs }}"
+      state: present
+
+  - name: clone schedule-scraper-soup git repo
+    git:
+      repo: "{{ project_repo }}"
+      dest: "{{ home_dir + project_name }}"
+    become: vagrant
+
+  - name: build project
+    shell: "{{ build_cmd }}"
+    become: vagrant
