@@ -1,0 +1,15 @@
+---
+remote_user: "vagrant"
+
+IUM: "http://centos7.iuscommunity.org/ius-release.rpm"
+install_pkgs: "['ansible','{{ IUM }}','yum-utils','wget','git']"
+
+epel_name: "epel-release-latest7.noarch.rpm"
+epel_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
+
+shared_dir: "/vagrant/"
+pem_file: "<filename>.pem"
+ssh_dir: "/home/{{ remote_user }}/.ssh/"
+
+ansible_config_dir: "/etc/ansible/"
+hosts_file: "hosts"

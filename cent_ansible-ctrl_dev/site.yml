@@ -1,0 +1,44 @@
+---
+- hosts: all
+  remote_user: vagrant
+  become: yes
+  
+  tasks:
+  - name: include vars in vars.yml
+    include_vars:
+      file: vars.yml
+
+  - name: update yum
+    yum:
+      name: '*' 
+      state: latest
+
+  - name: install ansible, centos7.ius-release.rpm, yum-utils, wget, git
+    yum:
+      name: "{{ install_pkgs }}"
+      state: present
+
+  - name: install "{{ epel_name }}"
+    yum:
+      name: "{{ epel_url }}"
+
+  - name: ensure "{{ ansible_config_dir }}" exists
+    file:
+      path: "{{ ansible_config_dir }}"
+      state: directory
+
+  - name: append hosts file to "{{ ansible_config_dir + hosts_file }}"
+    blockinfile:
+      dest: "{{ ansible_config_dir + hosts_file }}"
+      block: "{{ lookup('file', '{{ shared_dir + hosts_file }}') }}"
+      state: present
+      backup: yes
+
+  - name: copy .pem file to .ssh dir, chown & chmod
+    copy:
+      src: "{{ shared_dir + pem_file }}"
+      dest: "{{ ssh_dir + pem_file }}"
+      remote_src: yes
+      owner: "{{ remote_user }}"
+      group: "{{ remote_user }}"
+      mode: 0400
