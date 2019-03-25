@@ -27,6 +27,13 @@
       path: "{{ ansible_config_dir }}"
       state: directory
 
+  - name: insert var.yml's pem_file -> <pem-file> in hosts
+    replace:
+      path: "{{ shared_dir + hosts_file }}"
+      regexp: "<pem-file>"
+      replace: "{{ pem_file }}"
+
+
   - name: append hosts file to "{{ ansible_config_dir + hosts_file }}"
     blockinfile:
       dest: "{{ ansible_config_dir + hosts_file }}"
