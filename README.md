@@ -28,10 +28,10 @@ Vagrant CheatSheet --->  https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4
     4. Open new (cmd) terminal or $ refreshenv
     5. $ git clone https://github.com/spenfraz/vagrant-dev-envs.git
     6. $ cd vagrant-dev-envs\cent_ansible-ctrl_dev
-    7. Via AWS Console, launch an EC2 instance with 'Amazon Linux 2 AMI'.
+    7. Via AWS Console, launch an EC2 instance with 'Amazon Linux 2 AMI'. same as --> (steps 1-11) https://github.com/spenfraz/aws-ansible-ctrl/blob/master/README.md    
     8. Save the .pem file in vagrant-dev-envs\cent_ansible-ctrl_dev\ directory.
     9. (In "hosts" file) Replace <public-ip\> with the public ip of the launched EC2 instance.
-    10. (In "hosts" file) Replace <filename\> with the name of the .pem file.
+    10. (In "hosts" and "run.sh" files) Replace <filename\> with the name of the .pem file.
     11. $ vagrant up
     12. (after previous step finishes) $ vagrant ssh
     13. (should get: "[vagrant@ansible-dev ~]$ " prompt) $ ansible test -m ping
