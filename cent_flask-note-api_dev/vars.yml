@@ -1,0 +1,16 @@
+---
+remote_user: "vagrant"
+
+IUS: "http://centos7.iuscommunity.org/ius-release.rpm"
+install_pkgs: "['@Development tools','python36u','python36u-libs','python36u-devel','python36u-pip','yum-utils','wget','git']"
+
+mysql_rpm: "mysql-community-release-el7-5.noarch.rpm"
+mysql_rpm_url: "http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+
+mysql_python_connector_rpm: "mysql-connector-python-2.1.4-1.el7.x86_64.rpm"
+mysql_python_connector_url: "http://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-2.1.4-1.el7.x86_64.rpm"
+
+epel_name: "epel-release-latest7.noarch.rpm"
+epel_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
+
+shared_dir: "/vagrant/"

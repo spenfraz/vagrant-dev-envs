@@ -1,0 +1,130 @@
+---
+- hosts: all
+  remote_user: vagrant
+  become: yes
+  
+  tasks:
+  - name: include vars in vars.yml
+    include_vars:
+      file: vars.yml
+
+  - name: update yum
+    yum:
+      name: '*' 
+      state: latest
+
+  - name: install "{{ epel_name }}"
+    yum:
+      name: "{{ epel_url }}"
+      state: present
+
+  - name: install "{{ IUS }}"
+    yum:
+      name: "{{ IUS }}"
+      state: present
+
+  - name: install packages
+    yum:
+      name: "{{ install_pkgs }}"
+      state: present
+
+  - name: install "{{ mysql_rpm }}"
+    yum:
+      name: "{{ mysql_rpm_url }}"
+
+  - name: update yum
+    yum:
+      name: '*' 
+      state: latest
+
+  - name: install mysql-community-server
+    yum:
+      name: mysql-community-server
+      state: present
+
+  - name: clone flask-note-api
+    git:
+      repo: https://github.com/spenfraz/flask-note-api.git
+      dest: /home/vagrant/flask-note-api/
+      force: yes
+    become: vagrant
+
+  - name: start MySQL service
+    service:
+      name: mysqld
+      state: started
+      enabled: yes
+
+  - name: install PyMySQL (python3 MySQL connector)
+    yum:
+      name: MySQL-python
+      state: present
+
+  - name: replace csv path in note.sql
+    replace:
+      path: /home/vagrant/flask-note-api/note.sql
+      regexp: '/path/to/csv/file.csv'
+      replace: '/home/vagrant/flask-note-api/note.csv' 
+
+  - name: replace app.run() call with host & port param
+    replace:
+      path: /home/vagrant/flask-note-api/note-server-json.py
+      regexp: 'debug=True'
+      replace: "host='0.0.0.0',port=3000,debug=True"
+
+  - name: replace db connection url in note-server-json.py
+    replace:
+      path: /home/vagrant/flask-note-api/note-server-json.py
+      regexp: 'mysql://root:root123@localhost/notesdb'
+      replace: 'mysql://root:abc123@localhost/notesdb'
+
+  - name: ensure notesdb exists
+    mysql_db:
+      name: notesdb
+      state: present
+
+  - name: ensure mysql root password is set
+    mysql_user:
+      name: root
+      password: abc123
+      login_unix_socket: /var/lib/mysql/mysql.sock
+      priv: '*.*:ALL,GRANT'
+      check_implicit_admin: true
+    become: yes
+
+  - name: create /root/.my.cnf for root password credentials
+    template:
+      src: my.cnf.j2
+      dest: /root/.my.cnf
+      owner: root
+      mode: 0600
+    become: yes
+
+  - name: import data into database
+    mysql_db:
+      name: notesdb
+      state: import
+      target: /home/vagrant/flask-note-api/note.sql
+      login_user: root
+      login_password: abc123
+
+  - name: update pip, setuptools, wheel (python3.6) 
+    command: python3.6 -m pip install --upgrade pip setuptools wheel
+
+  - name: install virtualenv globally via pip
+    pip:
+      name: virtualenv
+      executable: pip3
+    become: yes
+    become_user: root
+
+  - name: install requirements
+    pip:
+      requirements: /home/vagrant/flask-note-api/requirements.txt
+      virtualenv: /home/vagrant/flask-note-api/venv
+      virtualenv_python: python3.6
+    become: vagrant
+
+  - name: run note-server-json.py
+    shell: source /home/vagrant/flask-note-api/venv/bin/activate; nohup python /home/vagrant/flask-note-api/note-server-json.py >> /home/vagrant/run.out 2>&1 &
+    become: vagrant
