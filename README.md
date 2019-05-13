@@ -102,3 +102,16 @@ Vagrant CheatSheet --->  https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4
     12. (The sqlite db file is ignored (text files of data are included), so no data will be shown until an "erase and build table" option is executed.)
     13. (to exit:) $ exit
     14. (will drop you back into the original terminal session)  Options:  $ vagrant (ssh, halt, suspend or destroy) 
+    
+- mwsu-schedule-api+search dev environment
+     ( **tested on** Windows 10 )
+     1. Install Git: https://git-scm.com/downloads
+     2. Install Chocolatey (Install with cmd.exe): https://chocolatey.org/install
+     3. Open Administrator terminal (cmd) & run: $ choco install vagrant virtualbox
+     4. Open new (cmd) terminal or $ refreshenv
+     5. $ git clone https://github.com/spenfraz/vagrant-dev-envs.git
+     6. $ cd vagrant-dev-envs\cent_mwsu-schedule-api+search_dev
+     7. $ vagrant up
+     8. (Once previous step finishes and control of the terminal returns:) for schedule-search checkout: http://localhost:3000
+     9. for schedule-api checkout: http://localhost:5000/sections , http://localhost:5000/departments , http://localhost:5000/subjects , http://localhost:5000/sections?find=courseID-csc&fields=title-courseID-department-section-type-days-time-crn&limit=20
+     10. $ vagrant (ssh, suspend, halt or destroy)
